@@ -31,7 +31,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'www.aunicetopupgh.com',
     '127.0.0.1',
-    'topup-gh-xhmu5.ondigitalocean.app'
+    'topup-gh-xhmu5.ondigitalocean.app',
+    'topup-gh-akhro.ondigitalocean.app'
 ]
 
 
