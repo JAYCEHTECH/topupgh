@@ -56,13 +56,13 @@ def pay_with_wallet(request):
                 user.wallet -= float(amount)
                 user.save()
                 receiver_message = f"Your bundle purchase has been completed successfully. {bundle}MB has been credited to you by {request.user.phone}.\nReference: {reference}\n"
-                sms_message = f"Hello @{request.user.username}. Your bundle purchase has been completed successfully. {bundle}MB has been credited to {phone_number}.\nReference: {reference}\nCurrent Wallet Balance: {user.wallet}\nThank you for using Aunice Topup GH.\n\nAunice Topup GH"
+                sms_message = f"Hello @{request.user.username}. Your bundle purchase has been completed successfully. {bundle}MB has been credited to {phone_number}.\nReference: {reference}\nCurrent Wallet Balance: {user.wallet}\nThank you for using Top Up Gh.\n\nTop Up Gh"
 
                 num_without_0 = phone_number[1:]
                 print(num_without_0)
                 receiver_body = {
                     'recipient': f"233{num_without_0}",
-                    'sender_id': 'Aunice Topup GH',
+                    'sender_id': 'Top Up Gh',
                     'message': receiver_message
                 }
 
@@ -71,7 +71,7 @@ def pay_with_wallet(request):
 
                 sms_body = {
                     'recipient': f"233{request.user.phone}",
-                    'sender_id': 'Aunice Topup GH',
+                    'sender_id': 'Top Up Gh',
                     'message': sms_message
                 }
 
@@ -153,13 +153,13 @@ def airtel_tigo(request):
                 print(request.user.phone)
                 print("***********")
                 receiver_message = f"Your bundle purchase has been completed successfully. {bundle}MB has been credited to you by {request.user.phone}.\nReference: {payment_reference}\n"
-                sms_message = f"Hello @{request.user.username}. Your bundle purchase has been completed successfully. {bundle}MB has been credited to {phone_number}.\nReference: {payment_reference}\nThank you for using Aunice Topup GH.\n\nAunice Topup GH"
+                sms_message = f"Hello @{request.user.username}. Your bundle purchase has been completed successfully. {bundle}MB has been credited to {phone_number}.\nReference: {payment_reference}\nThank you for using Top Up Gh.\n\nTop Up Gh"
 
                 num_without_0 = phone_number[1:]
                 print(num_without_0)
                 receiver_body = {
                     'recipient': f"233{num_without_0}",
-                    'sender_id': 'Aunice Topup GH',
+                    'sender_id': 'Top Up Gh',
                     'message': receiver_message
                 }
 
@@ -168,7 +168,7 @@ def airtel_tigo(request):
 
                 sms_body = {
                     'recipient': f"233{request.user.phone}",
-                    'sender_id': 'Aunice Topup GH',
+                    'sender_id': 'Top Up Gh',
                     'message': sms_message
                 }
 
@@ -181,11 +181,11 @@ def airtel_tigo(request):
                 transaction_to_be_updated = models.IShareBundleTransaction.objects.get(reference=payment_reference)
                 transaction_to_be_updated.transaction_status = "Failed"
                 new_transaction.save()
-                sms_message = f"Hello @{request.user.username}. Something went wrong with your transaction. Contact us for enquiries.\nBundle: {bundle}MB\nPhone Number: {phone_number}.\nReference: {payment_reference}\nThank you for using Aunice Topup GH.\n\nAunice Topup GH"
+                sms_message = f"Hello @{request.user.username}. Something went wrong with your transaction. Contact us for enquiries.\nBundle: {bundle}MB\nPhone Number: {phone_number}.\nReference: {payment_reference}\nThank you for using Top Up Gh.\n\nTop Up Gh"
 
                 sms_body = {
                     'recipient': f"233{request.user.phone}",
-                    'sender_id': 'Aunice Topup GH',
+                    'sender_id': 'Top Up Gh',
                     'message': sms_message
                 }
                 response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
@@ -198,7 +198,7 @@ def airtel_tigo(request):
             transaction_to_be_updated = models.IShareBundleTransaction.objects.get(reference=payment_reference)
             transaction_to_be_updated.transaction_status = "Failed"
             new_transaction.save()
-            sms_message = f"Hello @{request.user.username}. Something went wrong with your transaction. Contact us for enquiries.\nBundle: {bundle}MB\nPhone Number: {phone_number}.\nReference: {payment_reference}\nThank you for using Aunice Topup GH.\n\nAunice Topup GH"
+            sms_message = f"Hello @{request.user.username}. Something went wrong with your transaction. Contact us for enquiries.\nBundle: {bundle}MB\nPhone Number: {phone_number}.\nReference: {payment_reference}\nThank you for using Top Up Gh.\n\nTop Up Gh"
 
             sms_body = {
                 'recipient': f'233{request.user.phone}',
@@ -249,8 +249,8 @@ def mtn_pay_with_wallet(request):
         user.wallet -= float(amount)
         user.save()
         sms_body = {
-            'recipient': "233549914001",
-            'sender_id': 'Aunice Topup GH',
+            'recipient': "233242664332",
+            'sender_id': 'Top Up Gh',
             'message': sms_message
         }
         response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
@@ -299,8 +299,8 @@ def mtn(request):
         sms_message = f"An order has been placed. {bundle}MB for {phone_number}"
 
         sms_body = {
-            'recipient': "233549914001",
-            'sender_id': 'Aunice Topup GH',
+            'recipient': "233242664332",
+            'sender_id': 'Top Up Gh',
             'message': sms_message
         }
         response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
@@ -374,7 +374,7 @@ def mark_as_sent(request, pk):
 
         sms_body = {
             'recipient': f"233{txn.bundle_number}",
-            'sender_id': 'Aunice Topup GH',
+            'sender_id': 'Top Up Gh',
             'message': sms_message
         }
         response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
