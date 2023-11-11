@@ -50,7 +50,7 @@
               </div>
               <input type="hidden" value={{email}} class="email">
               <input type="hidden" value={{ref}} class="reference">
-<!--              <button type="submit" class="btn btn-success paystack-btn" onclick="payWithPaystack()"> Pay </button>-->
+              <button type="submit" class="btn btn-success paystack-btn" onclick="payWithPaystack()"> Pay </button>
               <button type="button" class="btn btn-primary pay-with-wallet">Pay with Wallet</button>
               <a style="display: none" class="spinner-border process text-primary mt-2" role="status"></a>
               <h6 class="mt-2"><i class="fa fa-money"></i> Wallet Balance: GHS {{wallet}}</h6>
@@ -84,7 +84,7 @@
     }
 
     let handler = PaystackPop.setup({
-      key: 'pk_live_2230bb77b771f4a0486d82574d23c7e936ed8188',
+      key: 'pk_live_211ba5679babae0b039d8369a30cd8056bdbaec7',
       email: email,
       amount: amount * 100,
       currency: "GHS",
