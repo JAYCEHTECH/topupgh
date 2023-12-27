@@ -254,8 +254,8 @@ def mtn_pay_with_wallet(request):
             'sender_id': 'Top Up Gh',
             'message': sms_message
         }
-        response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
-        print(response.text)
+        # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
+        # print(response.text)
         return JsonResponse({'status': "Your transaction will be completed shortly", 'icon': 'success'})
     return redirect('mtn')
 
@@ -304,11 +304,21 @@ def mtn(request):
             'sender_id': 'Top Up Gh',
             'message': sms_message
         }
-        response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
-        print(response.text)
+        # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
+        # print(response.text)
         return JsonResponse({'status': "Your transaction will be completed shortly", 'icon': 'success'})
-    user = models.CustomUser.objects.get(id=request.user.id)
-    context = {'form': form, "ref": reference, "email": user_email, "wallet": 0 if user.wallet is None else user.wallet}
+    phone_num = user.phone
+    mtn_dict = {}
+
+    if user.status == "Agent":
+        mtn_offer = models.AgentMTNBundlePrice.objects.all()
+    else:
+        mtn_offer = models.MTNBundlePrice.objects.all()
+    for offer in mtn_offer:
+        mtn_dict[str(offer)] = offer.bundle_volume
+    context = {'form': form, 'phone_num': phone_num, 'auth': auth, 'user_id': user_id, 'mtn_dict': json.dumps(mtn_dict),
+               "ref": reference, "email": user_email, "wallet": 0 if user.wallet is None else user.wallet}
+    return render(request, "layouts/services/mtn.html", context=context)
     return render(request, "layouts/services/mtn.html", context=context)
 
 
