@@ -1,5 +1,7 @@
 import json
 from datetime import datetime
+
+from decouple import config
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import requests
@@ -249,12 +251,12 @@ def mtn_pay_with_wallet(request):
         new_mtn_transaction.save()
         user.wallet -= float(amount)
         user.save()
-        admin = models.AdminInfo.objects.filter().first().phone_number
-        sms_body = {
-            'recipient': f"233{admin}",
-            'sender_id': 'Top Up Gh',
-            'message': sms_message
-        }
+        # admin = models.AdminInfo.objects.filter().first().phone_number
+        # sms_body = {
+        #     'recipient': f"233{admin}",
+        #     'sender_id': 'Top Up Gh',
+        #     'message': sms_message
+        # }
         # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
         # print(response.text)
         return JsonResponse({'status': "Your transaction will be completed shortly", 'icon': 'success'})
@@ -294,19 +296,19 @@ def mtn(request):
             reference=payment_reference,
         )
         new_mtn_transaction.save()
-        sms_headers = {
-            'Authorization': 'Bearer 1315|OPvu39KHZES3kegBxSJPIb5UmdYhw0WXXLdTivOC',
-            'Content-Type': 'application/json'
-        }
-
-        sms_url = 'https://webapp.usmsgh.com/api/sms/send'
-        sms_message = f"An order has been placed. {bundle}MB for {phone_number}"
-        admin = models.AdminInfo.objects.filter().first().phone_number
-        sms_body = {
-            'recipient': f"233{admin}",
-            'sender_id': 'Top Up Gh',
-            'message': sms_message
-        }
+        # sms_headers = {
+        #     'Authorization': 'Bearer 1315|OPvu39KHZES3kegBxSJPIb5UmdYhw0WXXLdTivOC',
+        #     'Content-Type': 'application/json'
+        # }
+        #
+        # sms_url = 'https://webapp.usmsgh.com/api/sms/send'
+        # sms_message = f"An order has been placed. {bundle}MB for {phone_number}"
+        # admin = models.AdminInfo.objects.filter().first().phone_number
+        # sms_body = {
+        #     'recipient': f"233{admin}",
+        #     'sender_id': 'Top Up Gh',
+        #     'message': sms_message
+        # }
         # response = requests.request('POST', url=sms_url, params=sms_body, headers=sms_headers)
         # print(response.text)
         return JsonResponse({'status': "Your transaction will be completed shortly", 'icon': 'success'})
