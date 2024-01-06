@@ -286,11 +286,13 @@ def mtn_pay_with_wallet(request):
 @login_required(login_url='login')
 def mtn(request):
     user = models.CustomUser.objects.get(id=request.user.id)
+    phone = user.phone
     status = user.status
     form = forms.MTNForm(status=status)
     reference = helper.ref_generator()
     user_email = request.user.email
     auth = config("AT")
+    print(auth)
     user_id = config("USER_ID")
     if request.method == "POST":
         payment_reference = request.POST.get("reference")
@@ -315,7 +317,7 @@ def mtn(request):
             "data_volume": bundle,
             "reference": reference,
             "amount": offer,
-            "channel": "wallet"
+            "channel": phone
         })
         headers = {
             'Authorization': auth,
